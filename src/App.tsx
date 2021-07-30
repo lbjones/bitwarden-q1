@@ -1,10 +1,13 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
+import {useScript} from './useScript';
 
 function App() {
+  const res = useScript({ src: 'https://js.stripe.com/v3/', async: true, id: 'stripe-script'});
+  
   return (
-    <div className="App">
+    <div className="App">{res}
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p>
