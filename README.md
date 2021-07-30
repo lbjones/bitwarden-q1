@@ -1,3 +1,17 @@
+# Question 1 - Custom Hooks for a Reusable Approach.
+
+Using custom hooks, explain how to accomplish reusable code to inject any external or third-party script into the page in a specific location using a component with props that allow for any number of attributes to be added to the injected script (id, name, async, crossorigin, etc).
+
+# Answer
+
+Using typescript, checks for existence of script on page to ensure there are no duplicates.
+
+When an error is encountered, remove script from DOM to allow for retries.
+
+Allows passing through any and all attributes (id, name, async, crossorigin, etc...) any invalid attributes will be blocked by typescript.
+
+Known limitation - if a script with same source but different properties, only the first instantiation will be accepted.
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
