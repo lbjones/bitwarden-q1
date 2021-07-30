@@ -15,6 +15,26 @@ describe('useScript()', () => {
     expect(element).not.toBeNull();
   });
 
+  it('adding a valid attribute adds it to the element', async () => {
+    renderHook(() => useScript({ src, crossOrigin: 'anonymous' }));
+
+    const element = document.querySelector(
+      `script[src="${src}"]`
+    ) as HTMLScriptElement;
+    expect(element).not.toBeNull();
+    expect(element).toHaveAttribute('crossorigin', 'anonymous');
+  });
+
+  it('adding an invalid attribute does not add it to the element', async () => {
+    renderHook(() => useScript({ src, badattribute: 'barf' }));
+
+    const element = document.querySelector(
+      `script[src="${src}"]`
+    ) as HTMLScriptElement;
+    expect(element).not.toBeNull();
+    expect(element).not.toHaveAttribute('badattribute', 'barf');
+  });
+
 
   it('is in loading state initially', async () => {
     const { result } = renderHook(() => useScript({src}));
