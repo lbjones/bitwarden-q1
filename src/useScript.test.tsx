@@ -77,6 +77,17 @@ describe('useScript()', () => {
     expect(result.current).toStrictEqual<string>('error');
   });
 
+  it('does not add multiple scripts of same src', async () => {
+    renderHook(() => useScript({ src }));
+    renderHook(() => useScript({ src }));
+    renderHook(() => useScript({ src }));
+
+    const elements = document.querySelectorAll(
+      `script[src="${src}"]`
+    );
+    expect(elements).toHaveLength(1);
+  });
+
 
   it('removes the <script> tag when unmounted', async () => {
     const { unmount } = renderHook(() => useScript({src}));
